@@ -5,15 +5,28 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "model:generate": "env-cmd sequelize-cli model:generate",
+    "db:create": "env-cmd sequelize-cli db:create",
+    "seed": "env-cmd sequelize-cli db:seed:all",
+    "migrate": "env-cmd sequelize-cli db:migrate",
+    "migrate:rollback": "env-cmd sequelize-cli db:migrate:undo",
+    "migrate:rollback:all": "env-cmd sequelize-cli db:migrate:undo:all"
   },
   "dependencies": {
+    "axios": "^0.27.2",
+    "env-cmd": "^10.1.0",
+    "mysql2": "^2.3.3",
     "next": "12.0.10",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "sequelize": "^6.21.4",
+    "sequelize-cli": "^6.4.1",
+    "sqlite3": "^5.0.11",
     "styled-components": "^5.3.3"
   },
   "devDependencies": {
+    "@types/express": "^4.17.13",
     "@types/node": "17.0.15",
     "@types/react": "17.0.39",
     "@types/styled-components": "^5.1.22",

@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+  db:
+    container_name: orm_example_db
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: 'password'
+    ports:
+      - 3306:3306
+networks:
+  default:
+    name: orm_example_net
