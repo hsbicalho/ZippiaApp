@@ -18,7 +18,7 @@ export default function NewJobForm() {
       description,
       location
     }
-    axios.post(process.env.API_URL, newJobObj);
+    axios.post(process.env.NEXT_PUBLIC_API_URL, newJobObj);
   }
 
   return (
