@@ -1,5 +1,5 @@
 export default interface IJobCard {
-  id: number;
+  _id: string;
   companyName: string;
   jobTitle: string;
   description: string;

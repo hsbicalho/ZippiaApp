@@ -1,11 +1,16 @@
 import { useEffect, useState } from "react";
-import fetchApi from "../helpers/API";
 import JobCard from "../components/JobCard";
 import IJobCard from "../interfaces/IJobCard";
 import Header from "../components/Header";
 import { JobsContainer, PageContainer, JobSearchSection } from "./styled";
+import dbConnect from "../lib/dbConnect";
+import Job from "../models/Job";
 
-function Home() {
+interface HomeProps {
+  jobs: IJobCard[];
+}
+
+function Home({ jobs }: HomeProps) {
   const [jobData, setJobData] = useState<IJobCard[]>([]);
   const [renderedJobData, setRenderedJobData] = useState<IJobCard[]>([]);
   const [companiesNames, setCompaniesNames] = useState<string[]>([]);
@@ -31,13 +36,10 @@ function Home() {
 
   useEffect(() => {
     // eslint-disable-next-line no-console
-    fetchApi().then((data: IJobCard[]) => {
-      setJobData(data);
-      setRenderedJobData(data);
-    });
+    setJobData(jobs);
+    setRenderedJobData(jobs);
     setTheCompaniesNames();
   }, []);
-
   return (
     <PageContainer>
       <Header />
@@ -52,8 +54,10 @@ function Home() {
         <JobsContainer>
           {renderedJobData.map((job: IJobCard) => (
             <JobCard
-              key={job.id}
-              id={job.id}
+              // eslint-disable-next-line no-underscore-dangle
+              key={job._id}
+              // eslint-disable-next-line no-underscore-dangle
+              _id={job._id}
               companyName={job.companyName}
               jobTitle={job.jobTitle}
               description={job.description}
@@ -66,5 +70,19 @@ function Home() {
     </PageContainer>
   );
 }
+export async function getServerSideProps() {
+  await dbConnect();
 
+  /* find all the data in our database */
+  const result = await Job.find({});
+  const jobs = result.map((doc) => {
+    const job = doc.toObject();
+    job.createdAt = JSON.parse(JSON.stringify(job.createdAt));
+    // eslint-disable-next-line no-underscore-dangle
+    job._id = job._id.toString();
+    return job;
+  });
+
+  return { props: { jobs } };
+}
 export default Home;
