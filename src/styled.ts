@@ -40,13 +40,13 @@ export const SelectCompany = styled.select`
   height: 3em;
   border-radius: .25em;
   overflow: hidden;
-  background-color: #34495e;
+  background-color: #3174ee;
   color:white;
 
     option{
       color:white;
       padding: 1em;
-      background-color: #34495e;
+      background-color: #3174ee;
       transition: .25s all ease;
       pointer-events: none;
 
