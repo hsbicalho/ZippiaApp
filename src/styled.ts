@@ -6,6 +6,7 @@ export const PageContainer = styled.div`
 `;
 
 export const JobSearchSection = styled.div`
+  max-width: 80rem;
   margin-left: 20rem;
   margin-right: 20rem;
 `;
@@ -84,3 +85,18 @@ export const LastSevenDaysButton = styled.div`
   background-color: #3174ee;
   color:white;
   `
+
+export const ToggleFormButton = styled.button`
+  margin-left: 2.5rem;
+  position: relative;
+  display: flex;
+  justify-content:center;
+  align-items:center;
+  width: 6rem;
+  height: 2.52em;
+  border: none;
+  border-radius: 4px;
+  overflow: hidden;
+  background-color: #3174ee;
+  color:white;
+`

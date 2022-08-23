@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import JobCard from "../components/JobCard";
 import IJobCard from "../interfaces/IJobCard";
 import Header from "../components/Header";
+import NewJobForm from "../components/NewJobForm";
 import {
   JobsContainer,
   PageContainer,
@@ -11,16 +12,15 @@ import {
   SelectCompany,
   LastSevenDaysButton,
   AllJobs,
+  ToggleFormButton,
 } from "../styled";
-import dbConnect from "../lib/dbConnect";
-import Job from "../models/Job";
 import postedLastSevenDays from '../helpers/postedLastSevenDays';
-
+import axios from 'axios'
 interface HomeProps {
   jobs: IJobCard[];
 }
 
-function Home({ jobs }: HomeProps) {
+function Home() {
   // State to keep all Data From the database available
   const [jobData, setJobData] = useState<IJobCard[]>([]);
   // State to set Rendered elements on the page
@@ -29,6 +29,9 @@ function Home({ jobs }: HomeProps) {
   const [companiesNames, setCompaniesNames] = useState<string[]>([]);
   //State to set the selected company
   const [selectedCompany, setSelectedCompany] = useState<string>();
+  //State to show the new Job create form
+  const [toggleNewJobForm, setToggleNewJobForm] =useState<boolean>(false);
+  const [newJob, setNewJob] = useState<IJobCard>({} as IJobCard);
 
   const setTheCompaniesNames = () => {
     const filterNames = jobData.map((job: IJobCard) => job.companyName);
@@ -54,17 +57,28 @@ function Home({ jobs }: HomeProps) {
     if (renderData) setRenderedJobData(renderData);
   }, [selectedCompany]);
 
+  console.log(jobData);
+  
   useEffect(() => {
     //Start UseEffect to get all datas from the database (MongoDB) and set State
     // eslint-disable-next-line no-console
-    setJobData(jobs);
-    setRenderedJobData(jobs);
-    setTheCompaniesNames();
+    axios.get('http://localhost:3001/api').then((response) => {
+      setJobData(response.data);
+      setRenderedJobData(response.data);
+      setTheCompaniesNames();
+    });
+    
+    
   }, []);
   return (
     <PageContainer>
       <Header />
       <JobSearchSection>
+      <ToggleFormButton
+      onClick={() => setToggleNewJobForm(!toggleNewJobForm)}
+      >Register a new job</ToggleFormButton>
+      {toggleNewJobForm && <NewJobForm/>}
+
       <FormsContainer>
         {/*button that will offer the jobs by company name. */}
       <AllJobs onClick={() => setRenderedJobData(jobData)}>All</AllJobs>
@@ -81,7 +95,7 @@ function Home({ jobs }: HomeProps) {
           <RecommendedForYou>RECOMMENDED FOR YOU</RecommendedForYou>
         <JobsContainer>
           {/* slice to show only 10 elements as requested*/}
-          {renderedJobData.slice(0,10).map((job: IJobCard) => (
+          {renderedJobData.map((job: IJobCard) => (
             <JobCard
               // eslint-disable-next-line no-underscore-dangle
               key={job._id}
@@ -99,19 +113,5 @@ function Home({ jobs }: HomeProps) {
     </PageContainer>
   );
 }
-export async function getServerSideProps() {
-  await dbConnect();
 
-  /* find all the data in our database */
-  const result = await Job.find({});
-  const jobs = result.map((doc) => {
-    const job = doc.toObject();
-    job.createdAt = JSON.parse(JSON.stringify(job.createdAt));
-    // eslint-disable-next-line no-underscore-dangle
-    job._id = job._id.toString();
-    return job;
-  });
-
-  return { props: { jobs } };
-}
 export default Home;

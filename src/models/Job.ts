@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 interface IJobSchema {
-  _id: string;
+  _id?: string;
   companyName: string;
   jobTitle: string;
   description: string;

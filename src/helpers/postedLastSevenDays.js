@@ -9,5 +9,4 @@ export default function timeSince(date) {
       return false
     }
     return true
-    
   }
