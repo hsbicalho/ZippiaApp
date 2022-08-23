@@ -79,3 +79,8 @@ export const JobDescription = styled.div`
   overflow-wrap: break-word;
   text-overflow: ellipsis;
 `;
+
+export const CreatedAt = styled.div`
+  margin-top: 4rem;
+  color:green;
+`

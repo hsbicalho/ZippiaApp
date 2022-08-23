@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import JobCard from "../components/JobCard";
 import IJobCard from "../interfaces/IJobCard";
 import Header from "../components/Header";
-import { JobsContainer, PageContainer, JobSearchSection } from "../styled";
+import { JobsContainer, PageContainer, JobSearchSection, RecommendedForYou, FormsContainer, SelectCompany } from "../styled";
 import dbConnect from "../lib/dbConnect";
 import Job from "../models/Job";
 
@@ -44,13 +44,16 @@ function Home({ jobs }: HomeProps) {
     <PageContainer>
       <Header />
       <JobSearchSection>
-        <select onChange={(event) => setSelectedCompany(event.target.value)}>
+      <FormsContainer>
+        <SelectCompany onChange={(event) => setSelectedCompany(event.target.value)}>
           {companiesNames.map((names: string) => (
             <option key={names} value={names}>
               {names}
             </option>
           ))}
-        </select>
+        </SelectCompany>
+        </FormsContainer>
+          <RecommendedForYou>RECOMMENDED FOR YOU</RecommendedForYou>
         <JobsContainer>
           {renderedJobData.map((job: IJobCard) => (
             <JobCard
