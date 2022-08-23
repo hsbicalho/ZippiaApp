@@ -15,7 +15,4 @@ export const JobsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   place-content: space-evenly;
-  /* width: 262px;
-  height: 224px;
-  margin: 0; */
 `;

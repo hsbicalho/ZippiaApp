@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import JobCard from "../components/JobCard";
 import IJobCard from "../interfaces/IJobCard";
 import Header from "../components/Header";
-import { JobsContainer, PageContainer, JobSearchSection } from "./styled";
+import { JobsContainer, PageContainer, JobSearchSection } from "../styled";
 import dbConnect from "../lib/dbConnect";
 import Job from "../models/Job";
 
