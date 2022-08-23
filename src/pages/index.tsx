@@ -62,7 +62,7 @@ function Home() {
   useEffect(() => {
     //Start UseEffect to get all datas from the database (MongoDB) and set State
     // eslint-disable-next-line no-console
-    axios.get('http://localhost:3001/api').then((response) => {
+    axios.get(process.env.API_URL).then((response) => {
       setJobData(response.data);
       setRenderedJobData(response.data);
       setTheCompaniesNames();

@@ -18,7 +18,7 @@ export default function NewJobForm() {
       description,
       location
     }
-    axios.post('http://localhost:3001/api', newJobObj);
+    axios.post(process.env.API_URL, newJobObj);
   }
 
   return (
