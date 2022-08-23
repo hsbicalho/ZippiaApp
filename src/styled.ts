@@ -20,25 +20,28 @@ export const JobsContainer = styled.div`
 export const RecommendedForYou = styled.h1`
 margin-left:3rem;
 margin-top:100px;
-margin-bottom: -140px;
+margin-bottom: -150px;
 `
 
 export const FormsContainer = styled.div`
+  margin-left:2rem;
+  margin-top:5rem;
   position: relative;
   display: flex;
-  width: 20em;
+  width: auto;
   height: 3em;
   border-radius: .25em;
   overflow: hidden;
 `
 
 export const SelectCompany = styled.select`
-  margin-left: 40px;
+  margin-left: 0.5rem;
   position: relative;
   display: flex;
   width: 12em;
   height: 3em;
-  border-radius: .25em;
+  border: none;
+  border-radius: 4px;
   overflow: hidden;
   background-color: #3174ee;
   color:white;
@@ -52,3 +55,32 @@ export const SelectCompany = styled.select`
 
     }
 `
+
+export const LastSevenDaysButton = styled.div`
+  margin-left: 0.5rem;
+  position: relative;
+  display: flex;
+  justify-content:center;
+  align-items:center;
+  width: 6rem;
+  height: 2.52em;
+  border: none;
+  border-radius: 4px;
+  overflow: hidden;
+  background-color: #3174ee;
+  color:white;
+  `
+  export const AllJobs = styled.div`
+  margin-left: 0.5rem;
+  position: relative;
+  display: flex;
+  justify-content:center;
+  align-items:center;
+  width: 6rem;
+  height: 2.52em;
+  border: none;
+  border-radius: 4px;
+  overflow: hidden;
+  background-color: #3174ee;
+  color:white;
+  `
