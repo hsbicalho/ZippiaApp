@@ -88,7 +88,7 @@ function Home() {
           <RecommendedForYou>RECOMMENDED FOR YOU</RecommendedForYou>
         <JobsContainer>
           {/* slice to show only 10 elements as requested*/}
-          {renderedJobData.map((job: IJobCard) => (
+          {renderedJobData.slice(0,10).map((job: IJobCard) => (
             <JobCard
               // eslint-disable-next-line no-underscore-dangle
               key={job._id}
